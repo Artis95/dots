@@ -1,0 +1,62 @@
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+Error 10 (BadAccess (attempt to access private resource denied)): request 28.0
+INFO: Read installed graphics (Spacefox) from log
+ERROR: ld.so: object '/usr/${LIB}/libgtk3-nocsd.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+ERROR: ld.so: object '/usr/${LIB}/libgtk3-nocsd.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+wine: cannot find '.wine/drive_c/Program Files (x86)/Stellaris Utopia/stellaris.exe'
+time="2017-09-11T14:04:30.127103406+02:00" level=info msg="libcontainerd: new containerd process, pid: 11295" 
+time="2017-09-11T14:04:30.135642825+02:00" level=warning msg="containerd: low RLIMIT_NOFILE changing to max" current=1024 max=4096 
+time="2017-09-11T14:04:31.141301035+02:00" level=info msg="[graphdriver] using prior storage driver: overlay2" 
+time="2017-09-11T14:04:31.151321812+02:00" level=info msg="Graph migration to content-addressability took 0.00 seconds" 
+time="2017-09-11T14:04:31.151634561+02:00" level=warning msg="Your kernel does not support cgroup rt period" 
+time="2017-09-11T14:04:31.151671425+02:00" level=warning msg="Your kernel does not support cgroup rt runtime" 
+time="2017-09-11T14:04:31.152139359+02:00" level=info msg="Loading containers: start." 
+time="2017-09-11T14:04:31.341752156+02:00" level=info msg="Default bridge (docker0) is assigned with an IP address 172.17.0.0/16. Daemon option --bip can be used to set a preferred IP address" 
+time="2017-09-11T14:04:31.429163516+02:00" level=info msg="Loading containers: done." 
+time="2017-09-11T14:04:31.470661026+02:00" level=info msg="Docker daemon" commit=87847530f7 graphdriver(s)=overlay2 version=17.07.0-ce 
+time="2017-09-11T14:04:31.470741534+02:00" level=info msg="Daemon has completed initialization" 
+time="2017-09-11T14:04:31.487321793+02:00" level=info msg="API listen on /var/run/docker.sock" 
+time="2017-09-11T14:04:45.040639086+02:00" level=info msg="Processing signal 'interrupt'" 
+time="2017-09-11T14:04:45.097627985+02:00" level=info msg="stopping containerd after receiving terminated" 
+usage: mopidy [-h] [--version] [-q] [-v] [--save-debug-log] [--config FILES]
+              [-o OPTIONS]
+
+unrecognized command: /dev/null

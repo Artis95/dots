@@ -1,0 +1,12 @@
+#!/bin/bash
+
+res=$(echo "sdv;ftl" | rofi -sep ";" -dmenu -p "vm:" -color-window "#151515, #43A047, #43A047" -color-normal "#151515, #ffffff, #151515, #151515, #43A047" -color-active "#151515, #006064, #151515, #151515, #fdf6e3" -color-urgent "#fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3" -font "gohufont 11" -bw 4  -line-margin 2 -lines 3 -width 400 -fuzzy -no-fixed-num-lines -location 7 -separator-style "none" -hide-scrollbar -no-show-match
+)
+
+if [ $res = "ftl" ]; then
+   /home/stan/Programs/ftl/data/FTL 
+fi
+if [ $res = "sdv" ]; then
+    /home/stan/.local/share/Steam/steamapps/common/Stardew\ Valley/StardewValley
+fi
+exit 0

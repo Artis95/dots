@@ -1,0 +1,8 @@
+#!/bin/bash
+hsetroot -solid '#151515'
+
+#
+#batstate="$(batstate)"
+#if [ "$batstate" == 'c' ]; then
+#	xwinwrap -ov -ni -fs -- mpv -wid WID --keepaspect=no --loop ~/Pics/Waterfall.mp4 &  
+#fi

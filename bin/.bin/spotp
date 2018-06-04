@@ -1,0 +1,3 @@
+#!/bin/bash
+
+nuvolaplayer3ctl  -a spotify action toggle-play

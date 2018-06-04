@@ -1,0 +1,6 @@
+#! /bin/bash 
+
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+
+nohup /home/stan/.programs/Visual_Paradigm_14.2/bin/Visual_Paradigm &

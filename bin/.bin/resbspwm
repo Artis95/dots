@@ -1,0 +1,3 @@
+#!/bin/bash
+
+nohup  /home/stan/.config/bspwm/bspwmrc >/dev/null 2>&1 &

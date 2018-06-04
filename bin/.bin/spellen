@@ -1,0 +1,5 @@
+#!/bin/bash
+FILE1=$1
+aspell -c -t $FILE1 -d en
+
+

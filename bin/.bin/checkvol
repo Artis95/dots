@@ -1,0 +1,11 @@
+#!/bin/bash
+
+mute=$(amixer -c 1 -M -D pulse get Master | grep 'off' | head -1)
+
+if [[ $mute == *"off"* ]]
+ then
+   echo mute
+else 
+echo vol $(check_volume.pl 0 )
+fi
+

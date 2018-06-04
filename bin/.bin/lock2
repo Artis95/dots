@@ -1,0 +1,35 @@
+#!/bin/sh
+
+B='#00000000'  # blank
+C='#ffffff00'  # clear ish
+D='#21212100'  # default
+T='#21515333'  # text
+W='#880000bb'  # wrong
+V='#846013ff'  # verifying
+
+i3lock              \
+--insidevercolor=$C   \
+--ringvercolor=$V     \
+\
+--insidewrongcolor=$C \
+--ringwrongcolor=$W   \
+\
+--insidecolor=$B      \
+--ringcolor=$D        \
+--linecolor=$B        \
+--separatorcolor=$D   \
+\
+--keyhlcolor=$V       \
+--bshlcolor=$W        \
+\
+--screen 0            \
+--blur 4              \
+--indicator           \
+\
+ --veriftext="Are you stan?"\
+ --wrongtext="Nope!"\
+ --textsize=20\
+ --modsize=10\
+ --timefont="hermit"\
+ --datefont="hermit"\
+# etc

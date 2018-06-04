@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rofi -show run -bw 3 -color-window "#151515, #b16286, #b16286" -color-normal "#151515, #ffffff, #151515, #151515, #b16286" -color-active "#151515, #b16286, #151515, #151515, #fdf6e3" -color-urgent "#fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3" -font "scientifica 10"  -line-margin 2 -lines 5 -width 400 -fuzzy -no-fixed-num-lines -location 2 -separator-style "none" -hide-scrollbar -no-show-match -prompt "test"

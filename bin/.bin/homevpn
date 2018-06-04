@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo openvpn --config /home/stan/.openvpn/stan.ovpn

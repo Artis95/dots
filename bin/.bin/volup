@@ -1,0 +1,6 @@
+#!/bin/bash
+cur=$(check_volume.pl 0)
+val=91
+if [[ $cur -le $val ]]; then
+pactl set-sink-volume 0 +10%
+fi

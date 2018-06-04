@@ -1,0 +1,9 @@
+#!/bin/sh
+
+
+for id in `xinput --list|grep 'SynPS/2 Synaptics TouchPad'|perl -ne 'while (m/id=(\d+)/g){print "$1\n";}'`; do
+    # echo "setting device ID $id"
+    #notify-send -t 50000  'Mouse fixed'
+    xinput set-prop $id 273 1
+    xinput set-prop $id 281 -0.5
+done

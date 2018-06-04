@@ -1,0 +1,20 @@
+#!/bin/bash
+
+res=$(echo "windows;kali;kali_on;kali_off" | rofi -sep ";" -dmenu -p "vm" -color-window "#151515, #43A047, #43A047" -color-normal "#151515, #ffffff, #151515, #151515, #43A047" -color-active "#151515, #006064, #151515, #151515, #fdf6e3" -color-urgent "#fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3" -font "scientifica 10" -bw 6  -line-margin 2 -lines 3 -width 400 -fuzzy -no-fixed-num-lines -location 2 -separator-style "none" -hide-scrollbar -no-show-match
+)
+
+if [ $res = "windows" ]; then
+VBoxManage startvm Windows --type gui
+fi
+if [ $res = "kali" ]; then
+VBoxManage startvm Kali --type gui
+fi
+if [ $res = "kali_on" ]; then
+VBoxManage startvm Kali  --type headless
+fi
+if [ $res = "kali_off" ]; then
+vboxmanage controlvm Kali poweroff soft
+fi
+exit 0
+
+

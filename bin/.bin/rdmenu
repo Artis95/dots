@@ -1,0 +1,3 @@
+#!/bin/bash
+
+i3-dmenu-desktop --dmenu='rofi -dmenu -bw 4 -color-window "#151515,#d79921, #d79921" -color-normal "#151515, #ffffff, #151515, #151515, #d79921" -color-active "#151515, #d79921, #151515, #151515, #fdf6e3" -color-urgent "#fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3" -font "gohufont 11"  -line-margin 2 -lines 5 -width 400 -fuzzy -no-fixed-num-lines -location 7 -separator-style "none" -hide-scrollbar -no-show-match'

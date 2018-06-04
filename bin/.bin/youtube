@@ -1,0 +1,44 @@
+#!/bin/bash
+search='results?search_query='
+entries=0
+
+input=`rofi -dmenu -p "Youtube Search"  -bw 3 -color-window "#151515, #cc241d, #b16286" -color-normal "#151515, #ebdbb2, #151515, #151515, #b16286" -color-active "#151515, #b16286, #151515, #151515, #fdf6e3" -color-urgent "#fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3" -font "scientifica 10"  -line-margin 2 -lines 4 -width 400 -fuzzy -no-fixed-num-lines -location 7 -separator-style "none" -hide-scrollbar  | sed 's/ /+/g'`
+
+
+
+result=$(curl -s "https://www.youtube.com/$search$input" 2>/dev/null) <<< $result
+
+title=`echo -e $(
+while IFS= read -r line
+  do
+    if [[ $line == *'title="'* && $line == *'href="'* && $line == *'data-sessionlink="'* && $line != *'u003'* && $line != *'title="__title__"'* && $line != *'href="//www.youtube.com/upload"'* ]];
+      then
+	line=$(echo $line | cut -f5 -d'>' | cut -f1 -d '<' |  sed '/^$/d' | perl -MHTML::Entities -pe 'decode_entities($_);')
+	if [[ $line != '' && $line != ' ' ]];
+	then
+	    entries=$((entries+1))
+	    echo -e "$line<RETURN>"
+        fi
+    fi	
+done <<< "$result"
+) | sed 's/<RETURN>/\n/g' | sed 's/^[ ]//' | rofi -dmenu -p "Youtube Results" -bw 3 -color-window "#151515, #cc241d, #b16286" -color-normal "#151515, #ebdbb2, #151515, #151515, #b16286" -color-active "#151515, #b16286, #151515, #151515, #fdf6e3" -color-urgent "#fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3" -font "scientifica 10"  -fuzzy -no-fixed-num-lines -location 7 -separator-style "none" -hide-scrollbar  `
+
+while IFS= read -r line
+  do
+    if [[ $line == *'title="'* && $line == *'href="'* && $line == *'data-sessionlink="'* && $line != *'u003'* && $line != *'title="__title__"'* && $line != *'href="//www.youtube.com/upload"'* ]];
+      then 
+        bline=$line
+        line=$(echo $line | cut -f5 -d'>' | cut -f1 -d '<' |  sed '/^$/d' | perl -MHTML::Entities -pe 'decode_entities($_);')
+        if [[ $line != '' && $line != ' ' ]];
+          then
+            if [[ "$line" == "$title"  ]]; 
+	      then
+                link="https://www.youtube.com"
+                link+=$(echo $bline | cut -f4 -d'>' | cut -f2 -d'"' | cut -f1 -d '"')
+	    fi
+
+        fi
+    fi  
+done <<< "$result"
+echo $link
+youtube-dl -q -o- "$link" | mpv - >/dev/null

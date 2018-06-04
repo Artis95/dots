@@ -1,0 +1,5 @@
+#!/bin/bash
+firefox-nightly &
+##qutebrowser --enable-webengine-inspector  ':enter-mode passthrough' &
+##sleep 0.2 
+##qutebrowser --enable-webengine-inspector  ':enter-mode passthrough' &

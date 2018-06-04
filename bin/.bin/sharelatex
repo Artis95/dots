@@ -1,0 +1,3 @@
+#!/bin/bash
+
+nohup  /home/stan/.programs/sharelatex/sharelatex >/dev/null 2>&1 &

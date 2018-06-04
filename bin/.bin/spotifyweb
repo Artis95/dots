@@ -1,0 +1,3 @@
+#!/bin/bash
+
+i3-msg "workspace "9 musc"; exec spotify-run"

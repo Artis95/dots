@@ -1,0 +1,21 @@
+#!/bin/bash
+
+previous="q"
+while :
+do
+batstate="$(batstate)"
+if [ "$batstate" != $previous ] && [ "$batstate" == 'c' ]; then
+	xwinwrap -ov -ni -fs -- mpv -wid WID --keepaspect=no --loop ~/Pics/Waterfall.mp4 &  
+
+    ##Charging, Do something
+	previous=$batstate
+elif [ "$batstate" != $previous ] && [ "$batstate" == 'd' ]; then
+	/usr/bin/kill $(ps aux | grep 'xwinwrap' | awk '{print $2}') 
+	previous=$batstate
+	## Discharing
+else
+	previous=$batstate
+    ## Batter status has not changed 
+fi
+sleep 1;
+done

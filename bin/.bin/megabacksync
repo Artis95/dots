@@ -1,0 +1,10 @@
+#!/bin/bash
+
+pactl set-sink-volume 0 -100%  
+sleep 3
+
+killall -q megasync
+while pgrep -x megasync >/dev/null; do sleep 1; done
+
+
+sleep 2 && pbar && sleep 2 && megasync &

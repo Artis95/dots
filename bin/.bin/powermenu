@@ -1,0 +1,37 @@
+#!/bin/bash
+
+res=$(echo "logout;none;shutdown;reboot;lock;suslock;suspend" | rofi -sep ";" -dmenu -p "command:" -color-window "#151515, #cc241d, #cc241d" -color-normal "#151515, #ffffff, #151515, #151515, #cc241d" -color-active "#151515, #006064, #151515, #151515, #fdf6e3" -color-urgent "#fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3" -font "gohufont 11" -bw 4 -line-margin 2 -lines 5 -width 400 -fuzzy -no-fixed-num-lines -location 7 -separator-style "none" -hide-scrollbar -no-show-match
+)
+
+if [ $res = "none" ]; then
+  exit 0
+fi
+if [ $res = "lock" ]; then
+    lock.sh
+fi
+if [ $res = "reload" ]; then
+    i3-msg reload
+fi
+if [ $res = "logout" ]; then
+    resettray
+    i3-msg exit  
+    exit
+fi
+if [ $res = "suslock" ]; then
+    /home/stan/.scripts/lockandsuspend.sh
+fi
+if [ $res = "suspend" ]; then
+    systemctl suspend
+fi
+if [ $res = "reboot" ]; then
+    resettray
+    systemctl reboot
+fi
+if [ $res = "shutdown" ]; then
+    resettray
+    systemctl poweroff
+fi
+exit 0
+
+
+rofi -show run -bw 4 -fuzz    y

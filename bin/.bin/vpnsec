@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo openconnect vpnseclab.fhict.nl -g SeclabSSLAlias -u i303823

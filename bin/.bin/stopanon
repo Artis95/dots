@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo anonsurf stop  && sudo ufw enable

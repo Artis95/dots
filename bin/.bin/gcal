@@ -1,0 +1,3 @@
+#!/bin/bash
+
+~/.calcurse/caldav//calcurse-caldav.py --init=two-way --authcode '4/AADK3YZ-KDh0FmaERZwKvaLerOD0K-e3txdhhgA-9sre8xqFlE8Ms6a_8EhwrSnIh59d6TG1KXNGTdfgh2c3pf4#' && calcurse

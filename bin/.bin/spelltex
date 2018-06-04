@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+
+
+
+ for i in $(ls);do
+    if [[ $i =~ .*\.tex$ ]];then
+	aspell -c -t $i -d nl --mode=tex
+    fi
+done
+

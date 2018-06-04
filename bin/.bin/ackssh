@@ -1,0 +1,2 @@
+#! /bin/bash
+ssh stanv@2a06:1480:5ec:320::d5
