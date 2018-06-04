@@ -1,0 +1,11 @@
+#!/bin/bash
+
+ip=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | sed '$!d')
+
+if [[ $ip == *"172.16.4.1"* ]]
+ then
+   echo no ip
+else 
+echo $ip
+fi
+

@@ -1,0 +1,278 @@
+[settings]
+throttle-output = 5
+throttle-output-for = 10
+throttle-input-for = 30
+screenchange-reload = false
+
+[colors]
+background 	= #151515
+foreground 	= #C5C8C6
+colour_1	= #707880
+colour_2	= #5F819D
+colour_3	= #CC6666
+
+[bar/systray]
+;monitor = ${env:MONITOR:eDP-1-1}
+bottom = true
+width = 1
+height = 16
+offset-x = 5
+offset-y = 5
+radius = 0.0
+fixed-center = true
+
+background = ${colors.background}
+foreground =  ${colors.foreground}
+underline-size = 1
+overline-size = 1
+line-size = 4
+
+padding-left = 0
+padding-right = 3
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = Gohufont:size=10
+font-1 = Hack:size=10
+font-2 = FontAwesome:fontformat=truetype:size=9;1
+
+modules-left =
+modules-center =
+modules-right = placeholder
+
+tray-position = left
+tray-maxsize = 16
+tray-padding = 8
+tray-transparent = true
+tray-background = #151515
+override-redirect = true
+
+
+[module/placeholder]
+# Just a dummy module as polybar always requires at least one amodule
+type = custom/script
+width = 1
+
+[module/i3]
+type = internal/i3
+label-unfocused-background = ${colors.background}
+label-unfocused-foreground = ${colors.foreground}
+
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-background = ${colors.colour_1}
+
+label-focused = %{F-}%name%
+label-focused-foreground = ${colors.colour_1}
+label-focused-background = ${colors.background}
+;label-focused-underline = ${colors.colour_1}
+label-focused-padding = 2
+
+label-unfocused = %{F#707880}%name%
+label-unfocused-padding = 2
+;label-unfocused-foreground = ${colors.colour_1}
+;label-unfocused-underline = ${colors.colour_1}
+
+
+
+label-visible = %name%
+label-visible-underline = ${colors.foreground}
+label-visible-padding = 1
+
+label-urgent = %name%
+label-urgent-foreground = ${colors.foreground}
+label-urgent-background = ${colors.background}
+label-urgent-underline = ${colors.colour_3}
+label-urgent-padding = 2
+
+wrapping-scroll = false
+index-sort = true
+strip-wsnumbers = true
+
+[module/xwindow]
+type = internal/xwindow
+label-maxlen = 30
+
+[module/date]
+type = internal/date
+interval = 5
+
+format = <label>
+;format-underline = ${colors.colour_1}
+
+label = %time% %date%
+
+date-alt = %{F#707880}Date: %{F-}%d-%m-%Y"
+
+;time = %H:%M
+time = %{F#707880}Time: %{F-}%H:%M"
+time-alt = %{F#707880}Time: %{F-}%H:%M"
+
+[module/volume]
+type = internal/volume
+speaker_mixer = Speaker
+headphone_mixer = Headphone
+headphone_control_numid = 23
+
+format-muted-background = ${colors.background}
+format-volume-background = ${colors.background}
+format-volume = %{F#707880}Sound: %{F-}<label-volume> <bar-volume>
+label-muted = %{F#707880}Sound: %{F-}Muted
+
+bar-volume-width = 10
+bar-volume-foreground = ${colors.foreground}
+bar-volume-gradient = false
+bar-volume-indicator= ~
+bar-volume-indicator-font = 1
+bar-volume-fill = ─
+bar-volume-fill-font = 1
+bar-volume-empty = ─
+bar-volume-empty-font = 1
+bar-volume-empty-foreground = ${colors.colour_1}
+
+
+[module/wireless-network]
+type = internal/network
+interface = wlan0
+interval = 3.0
+
+format-connected-prefix = Wireless:
+format-connected-prefix-foreground = ${colors.colour_1}
+format-connected = <label-connected>
+format-connected-spacing = 1
+
+label-connected = " %essid%  %{F#707880}Ip: %{F-}%local_ip%"
+label-disconnected = No Wifi
+label-disconnected-foreground = ${colors.colour_3}
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+[module/BAT0]
+type = internal/battery
+full-at = 99
+
+battery = BAT0
+adapter = AC
+poll-interval = 5
+
+time-format = %H:%M
+
+format-charging = Bat0: <label-charging>
+format-discharging = Bat0: <label-discharging>
+format-full =
+
+format-charging-foreground = ${colors.colour_1}
+format-discharging-foreground = ${colors.colour_1}
+format-full-foreground = ${colors.colour_1}
+
+label-charging = %percentage%%
+label-discharging = %percentage%%
+label-full = Full
+
+label-charging-foreground = ${colors.foreground}
+label-discharging-foreground = ${colors.foreground}
+label-full-foreground = ${colors.foreground}
+
+
+[module/BAT1]
+type = internal/battery
+full-at = 99
+
+battery = BAT1
+adapter = AC
+poll-interval = 1
+
+time-format = %H:%M
+
+format-charging = Bat1: <label-charging>
+format-discharging = Bat1: <label-discharging>
+format-full =
+
+format-charging-foreground = ${colors.colour_1}
+format-discharging-foreground = ${colors.colour_1}
+format-full-foreground = ${colors.colour_1}
+
+label-charging =%percentage%%
+label-discharging = %percentage%%
+label-full = Full
+
+label-charging-foreground = ${colors.foreground}
+label-discharging-foreground = ${colors.foreground}
+label-full-foreground = ${colors.foreground}
+
+
+[module/memory]
+type = internal/memory
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 3
+label = %mb_used%
+format = %{F#707880}Mem: %{F-}<label>
+
+
+[module/charging]
+type = custom/script
+format = %{F-}<label>
+label = "%output:0:30%"
+exec= echo "$(batstate)"
+
+
+[module/updates]
+type = custom/script
+format = %{F#707880}Updates: %{F-}<label>
+label = "%output:0:30%"
+exec= echo "$(updates)"
+click-left = echo " "
+
+
+[module/filesystem]
+type = internal/fs
+
+; Mountpoints to display
+mount-0 = /
+format-mounted = <label-mounted>
+label-mounted = %{F#707880}Space: %{F-}%free%
+
+; Seconds to sleep between updates
+; Default: 30
+interval = 10
+
+; Display fixed precision values
+; Default: false
+fixed-values = true
+
+; Spacing between entries
+; Default: 2
+spacing = 4
+
+[module/freemem]
+type = custom/script
+format = %{F#707880}Mem: %{F-}<label>
+label = "%output:0:30%"
+exec= echo "$(freemem)"
+
+[module/vpn]
+type = internal/network
+interface = tun0
+
+interval = 5.0
+accumulate-stats = true
+format-connected =VPN: <label-connected>
+format-connected-foreground = ${colors.colour_1}
+format-disconnected = <label-disconnected>
+label-connected = Connected
+label-connected-foreground = ${colors.foreground}
+
+label-disconnected =
+label-disconnected-foreground = ${colors.foreground}
+
+[module/music]
+type = custom/script
+interval = 2
+label = %output:0:45:...%
+format = %{F#707880}Song: %{F#C5C8C6}<label>
+exec = ~/.config/polybar/mpris.sh

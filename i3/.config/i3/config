@@ -1,0 +1,353 @@
+#
+#   d8b    .d8888b.                                      .d888   d8b
+#   Y8P   d88P  Y88b                                    d88P"    Y8P
+#              .d88P                                    888
+#   888       8888"     .d8888b    .d88b.    88888b.    888888   888    .d88b.
+#   888        "Y8b.   d88P"      d88""88b   888 "88b   888      888   d88P"88b
+#   888   888    888   888        888  888   888  888   888      888   888  888
+#   888   Y88b  d88P   Y88b.      Y88..88P   888  888   888      888   Y88b 888
+#   888    "Y8888P"     "Y8888P    "Y88P"    888  888   888      888    "Y88888
+#                                                                           888
+#                                                                      Y8b d88P
+#                                                                       "Y88P"
+
+# Font for window titles
+font pango:gohufont 11
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# kill focused window
+bindsym $mod+q kill
+
+
+#exec hideIt.sh --name '^Polybar tray window$' --signal
+
+# start Rofi
+#bindsym $mod+d exec rofi -show run -lines 11  -eh 2 -width 400 -padding 310 -opacity "100" -bw 0 -bc "#151515" -bg "#151515" -fg "$text-color" -hlbg "#151515" -hlfg "#FFCA28" -font "gohufont 12" -fuzzy -fullscreen -location 0
+
+# start Rofi with i3 desktop so certain program can be loaded
+bindsym $mod+Shift+d exec rdmenu
+
+bindsym $mod+d exec rmenu
+bindsym $mod+t exec hideIt.sh --name '^Polybar tray window$' --toggle
+
+#bindsym $mod+d exec rofi -show run -color-window "#151515, #151515, #151515" -color-normal "#151515, #ffffff, #151515, #151515, #eee8d5" -color-active "#151515, #006064, #151515, #151515, #fdf6e3" -color-urgent "#fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3" -lines 11  -eh 2 -width 400 -padding 30 -opacity "100" -font "gohufont 12" -fuzzy -location 0
+
+#bindsym $mod+d exec rofi -show run -lines 11 -eh 3 -width 400 -font "gohufont 12" -fullscreen -padding 200 -opacity "95" -fuzzy -bw 10
+
+#bindsym $mod+d exec dmenu_run -fn 'gohufont-10' -nb '#151515' -sb '#151515' -sf '#FFCA28' -i -l '0'
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Cycle through active workspaces
+bindsym $mod+Tab workspace prev
+bindsym Mod1+Tab workspace next
+bindsym Menu exec rofi -show window -lines 11  -eh 2 -width 100 -padding 40 -opacity "100" -bw 0 -bc "#151515" -bg "#151515" -fg "$text-color" -hlbg "#202020" -hlfg "#2980b9" -font "gohufont 12"
+#bindsym mod5+space exec rofi -show window -lines 11  -eh 2 -width 10 -padding 100 -opacity "100" -bw 0 -bc "#151515" -bg "#151515" -fg "$text-color" -hlbg "#202020" -hlfg "#2980b9" -font "gohufont 12"
+
+# resize:
+bindsym $mod+Left resize shrink width 5 px or 5 ppt
+bindsym $mod+Down resize grow height 5 px or 5 ppt
+bindsym $mod+Up resize shrink height 5 px or 5 ppt
+bindsym $mod+Right resize grow width 5 px or 5 ppt
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+semicolon split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s exec smenu
+#bindsym $mod+w layout tabbed
+#bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+f floating toggle
+
+# change focus between tiling / floating windows
+#bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+x focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace $w1
+bindsym $mod+2 workspace $w2
+bindsym $mod+3 workspace $w3
+bindsym $mod+4 workspace $w4
+bindsym $mod+5 workspace $w5
+bindsym $mod+6 workspace $w6
+bindsym $mod+7 workspace $w7
+bindsym $mod+8 workspace $w8
+bindsym $mod+9 workspace $w9
+bindsym $mod+0 workspace $w0
+#go to urgent
+bindsym $mod+a [urgent=latest] focus
+
+# switch to workspace keypad
+bindsym $mod+KP_1 workspace $w1
+bindsym $mod+KP_2 workspace $w2
+bindsym $mod+KP_3 workspace $w3
+bindsym $mod+KP_4 workspace $w4
+bindsym $mod+KP_5 workspace $w5
+bindsym $mod+KP_6 workspace $w6
+bindsym $mod+KP_7 workspace $w7
+bindsym $mod+KP_8 workspace $w8
+bindsym $mod+KP_9 workspace $w9
+bindsym $mod+KP_0 workspace $w0
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $w1
+bindsym $mod+Shift+2 move container to workspace $w2
+bindsym $mod+Shift+3 move container to workspace $w3
+bindsym $mod+Shift+4 move container to workspace $w4
+bindsym $mod+Shift+5 move container to workspace $w5
+bindsym $mod+Shift+6 move container to workspace $w6
+bindsym $mod+Shift+7 move container to workspace $w7
+bindsym $mod+Shift+8 move container to workspace $w8
+bindsym $mod+Shift+9 move container to workspace $w9
+bindsym $mod+Shift+0 move container to workspace $w0
+
+# move focused container to workspace KEYPAD
+bindsym $mod+Shift+KP_1 move container to workspace $w1
+bindsym $mod+Shift+KP_2 move container to workspace $w2
+bindsym $mod+Shift+KP_3 move container to workspace $w3
+bindsym $mod+Shift+KP_4 move container to workspace $w4
+bindsym $mod+Shift+KP_5 move container to workspace $w5
+bindsym $mod+Shift+KP_6 move container to workspace $w6
+bindsym $mod+Shift+KP_7 move container to workspace $w7
+bindsym $mod+Shift+KP_8 move container to workspace $w8
+bindsym $mod+Shift+KP_9 move container to workspace $w9
+bindsym $mod+Shift+KP_0 move container to workspace $ws10
+
+#custom keybinds
+
+bindsym Print exec maim -s | xclip -selection clipboard -t image/png
+bindsym Mod1+space exec /home/stan/.bin/lock2.sh
+bindsym Shift+ Print exec maim -s ~/Pictures/$(date +%s).png
+#bindsym $mod+h move scratchpad
+bindsym $mod+space exec powermenu
+bindsym $mod+plus gaps inner all plus 10
+bindsym $mod+minus gaps inner all minus 10
+bindsym $mod+Shift+Return gaps inner all set 20
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec volup
+bindsym XF86AudioLowerVolume exec voldown
+bindsym XF86AudioMute exec volmute
+
+
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+#bindsym $mod+Shift+e exec =
+bindsym $mod+Shift+e exec /home/stan/.bin/powermenu
+
+# Polybar
+
+#exec_always --no-startup-id pbar
+
+#starting polybar from this srcipt with cloud
+exec --no-startup-id megabacksync
+
+
+#toggle the bar with and without tray
+#bindsym $mod+z  bar mode toggle
+
+#bar {
+#
+#   status_command i3blocks
+#   font pango:gohufont 9
+#   height 17
+#
+#   position top
+#
+#   strip_workspace_numbers no
+#    tray_output none
+#    modifier Mod5
+#
+#
+#   colors {
+#     background  $colour2a
+#      statusline $colour1b
+#      separator  $colour2a
+#
+#      #                    border    bg	       text
+#      focused_workspace	   $colour1c $colour1a $colour1b
+#      active_workspace	   $colour1c $colour1a $colour1b
+#      inactive_workspace   $colour2c $colour2a $colour2b
+#      urgent_workspace	   $colour3c $colour3a $colour3b
+#   }
+#}
+
+#bar {
+#
+#   status_command i3blocks
+#
+#   font pango:gohufont 9
+#    height 17
+#    modifier Mod5
+#    mode hide
+#    hidden_state hide
+#   position top
+#
+#
+#   strip_workspace_numbers no
+#
+#
+#   colors {
+#     background  $colour2a
+#      statusline $colour1b
+#      separator  $colour2a
+#
+#      #                    border    bg	       text
+#      focused_workspace	   $colour1c $colour1a $colour1b
+#      active_workspace	   $colour1c $colour1a $colour1b
+#      inactive_workspace   $colour2c $colour2a $colour2b
+#      urgent_workspace	   $colour3c $colour3a $colour3b
+#   }
+#}
+
+bindsym $mod+b mode "Borders"
+for_window [class="^.*"] border pixel 0
+for_window [class="urxvt"] border pixel 2
+gaps inner 15
+
+# A mode to change the borders and gaps
+mode "Borders" {
+
+    # Gaps for some eye candy
+    bindsym plus gaps inner all plus 10
+    bindsym minus gaps inner all minus 10
+    bindsym space gaps inner all set 5
+    bindsym Return gaps inner all set 0
+    bindsym Control+plus gaps outer all plus 10
+    bindsym Control+minus gaps outer all minus 10
+    bindsym Control+space gaps outer all set 5
+    bindsym Control+Return gaps outer all set 0
+
+
+    # Back to normal: Escape
+    bindsym Capslock mode "default"
+    bindsym Escape mode "default"
+
+}
+
+# Startup stuff
+#notfied
+exec dunst
+#composition manager
+#exec_always --no-startup-id compton -CGb --backend glx --vsync opengl
+#exec_always --no-startup-id  compton --config ~/.config/compton.conf --xrender-sync-fence
+exec_always --no-startup-id  compton --xrender-sync-fence --xrender-sync --backend glx --vsync opengl-swc -b --dbus
+#disable caps lock switch
+exec_always xmodmap -e "clear lock"
+#set caps_lock as escape
+exec_always xmodmap -e "keysym Caps_Lock = Escape"
+exec nm-applet etc
+#exec_always feh --bg-scale /home/stan/Pictures/Wallpapers/wallpaper.jpg
+#exec_always feh --bg-scale /home/stan/Pictures/wallpaper.jpg
+exec_always hsetroot -solid "#151515"
+
+exec --no-startup-id i3-msg "workspace $w2; exec i3-sensible-terminal"
+exec --no-startup-id i3-msg "workspace $w5; exec www"
+#exec --no-startup-id i3-msg "workspace $w7; exec telegram"
+
+
+#custom script to fix touchpad
+exec_always --no-startup-id touchpad
+
+#custom script for tmp remove in home
+exec deletetmp
+
+#Assigntoworkspace
+assign[class="VirtualBox"] $w0
+assign[class="Spotify"] $w9
+assign[class="Atom"] $w3
+
+
+
+#variables
+set $mod Mod4
+set $w0 "0:vms"
+set $w1 "1:stn"
+set $w2 "2:ter"
+set $w3 "3:cod"
+set $w4 "4:fim"
+set $w5 "5:www"
+set $w6 "6:ext"
+set $w7 "7:cht"
+set $w8 "8:tem"
+set $w9 "9:mus"
+
+
+# colors
+#                       border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $text-color          #2c3e50
+client.unfocused        $iancative-bg-color $inactive-bg-color $inactive-text-color #2c3e50
+client.focused_inactive $iancative-bg-color $inactive-bg-color $inactive-text-color #2c3e50
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #c0392b
+
+
+set $bg-color 	         #333333
+set $inactive-bg-color   #2d2d2d
+set $text-color          #f3f4f5
+set $inactive-text-color #7f8c8d
+set $urgent-bg-color     #2980b9
+
+### Bar ###############################
+# Colour of active workspace
+set $colour1a "#151515"
+set $colour1b "#FFFFFF"
+set $colour1c "#151515"
+
+# Colour of bar and inactive workspace
+set $colour2a "#151515"
+set $colour2b "#666666"
+set $colour2c "#151515"
+
+# Colour of alert workspace
+set $colour3a "#FFFFFF"
+set $colour3b "#151515"
+set $colour3c "#151515"
+#######################################
+# cause floating is needed sometimes
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [class="FTL"] floating disable
+
+
+#exec toggletray

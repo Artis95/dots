@@ -1,0 +1,79 @@
+// vim:ts=4:sw=4:et
+
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.8,
+    "type": "con",
+    "nodes": [
+        {
+            // splith split container with 2 children
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splith",
+            "percent": 0.8,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 3,
+                    "floating": "auto_off",
+                    "geometry": {
+                        "height": 292,
+                        "width": 484,
+                        "x": 0,
+                        "y": 0
+                    },
+                    "name": "urxvt",
+                    "percent": 0.7,
+                    "swallows": [
+                        {
+                            "instance": "^urxvt1$"
+                        }
+                    ],
+                    "type": "con"
+                },
+                {
+                    "border": "pixel",
+                    "current_border_width": 3,
+                    "floating": "auto_off",
+                    "geometry": {
+                        "height": 292,
+                        "width": 484,
+                        "x": 0,
+                        "y": 0
+                    },
+                    "name": "urxvt",
+                    "percent": 0.3,
+                    "swallows": [
+                        {
+                            "instance": "^urxvt2$"
+                        }
+                    ],
+                    "type": "con"
+                }
+            ]
+        },
+
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "auto_off",
+            "geometry": {
+                "height": 292,
+                "width": 484,
+                "x": 0,
+                "y": 0
+            },
+            "name": "urxvt",
+            "percent": 0.2,
+            "swallows": [
+                {
+                    "instance": "^urxvt3$"
+                }
+            ],
+            "type": "con"
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+[bar/systray]
+# As small as possible, polybar will resize it when items get added
+width = 1
+background = #151515
+
+# Whatever fits your needs
+height = 30
+
+# Bottom left to imitate gnome-shells systray
+bottom = true
+# REQUIRED for us to be able to move the window
+override-redirect = true
+
+modules-right = date placeholder
+tray-position = left
+tray-maxsize = 30
+tray-padding = 8
+tray-transparent = false
+tray-background = #151515
+
+[module/placeholder]
+# Just a dummy module as polybar always requires at least one amodule
+type = custom/script
+width = 1
+
+[module/date]
+type = internal/date
+interval = 5
+
+format = <label>
+;format-underline = ${colors.colour_1}
+
+label = %time% %date%
+
+date-alt = %{F#707880}Date: %{F-}%d-%m-%Y"
+
+;time = %H:%M
+time = %{F#707880}Time: %{F-}%H:%M"
+time-alt = %{F#707880}Time: %{F-}%H:%M"
