@@ -1,4 +1,4 @@
-URxvt.font: xft:scientifica:size=11, xft: Wuncon Siji:size=10
+URxvt.font: xft:curie:size=11, xft: Wuncon Siji:size=10
 
 !URxvt*termName: xterm-256color
 URxvt.scrollBar: false
