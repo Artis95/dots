@@ -3,4 +3,5 @@
 # pbar &
 compton --xrender-sync-fence --xrender-sync --backend glx --vsync opengl-swc -b --dbus &
 setbackground &
-#batterywall &
+#pbarbatterywall &
+megabacksync

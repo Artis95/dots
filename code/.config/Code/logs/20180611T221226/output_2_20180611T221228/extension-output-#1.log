@@ -1,0 +1,2 @@
+22:12:31 - Unhandled Rejection at: Promise [object Promise]. Reason: TypeError: Cannot read property 'document' of undefined.
+22:12:31 - CommandLineHistory: History does not exist.

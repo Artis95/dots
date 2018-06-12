@@ -25,148 +25,44 @@ if !isdirectory($HOME . "/.vim/undodir")
     call mkdir($HOME . "/.vim/undodir", "p")
 endif
 
-
-set list
-
-
-""" Key modifiers
-
-"set pastetoggle=<F2>
-"map <F3> :F <C-r><C-w><Cr>
-"map <F5> :make!<cr>
-"map <F6> :set hlsearch!<CR>
-
+"Easier ESC?
 inoremap kj <ESC>
 
-map H ^
-map L $
 
-"nmap <silent> <C-e> <Plug>(ale_next_wrap)
-
+"Custom remaps 
 nnoremap J :bprev<CR>
 nnoremap K :bnext<CR>
+nnoremap <C-m> :bnext<CR>
+nnoremap <C-n> :bprev<CR>
 
-nnoremap M J
-"nnoremap S "_diwP
+"Beginning of line
+map H ^
+"End of line
+map L $
 
-"map "p vi"p
-"map 'p vi'p
-"map (p vi(p
-"map )p vi)p
-
-map q: :q
-map n nzz
-xnoremap p "_dP
-"cmap w!! w !sudo tee > /dev/null %
-"map <C-s> magcii`a
-
-
-"nnoremap <C-b> :Buffers<cr>
-"cmap bc :Bclose<Cr>
-
-
-inoremap <Space><Tab> <Esc>/<++><Enter>"_c4l
-vnoremap <Space><Tab> <Esc>/<++><Enter>"_c4l
-map <Space><Tab> <Esc>/<++><Enter>"_c4l
-
-
-inoremap <Space><S-Tab> <Esc>/<++><Enter>N"_c4l
-vnoremap <Space><S-Tab> <Esc>/<++><Enter>N"_c4l
-map <Space><S-Tab> <Esc>/<++><Enter>N"_c4l
-
-
-
-nnoremap <tab> :bnext<CR>
 nnoremap <s-tab> :bprev<CR>
 nnoremap <C-t> :bnew<CR>
 nnoremap <C-b> :Beautify<CR>
 inoremap <C-t> <Esc>:bnew<CR>i
 
-noremap gt <C-w>gf
-noremap gs <C-w>vgf
-noremap gi <C-w>f
-noremap <C-]> <C-w><C-]><C-w>T
+".vimrc
+map <c-f> :call JsBeautify()<cr>
+" or
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+" for json
+autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
+" for jsx
+autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
+" for html
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+" for css or scss
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
-inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
-inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
-"inoremap <expr> <tab> ((pumvisible())?("\<Cr>"):("<Cr>"))
-
-"imap <Tab> <C-X><C-F>
-"imap <s-Tab> <C-X><C-P>
-
-map cp :CopyRelativePath<Cr>
-map gp :Sprunge<cr>
-map go :Google<cr>
-map gl :Gblame<Cr>
-map gb :Gbrowse<Cr>
-map ch :Gread<Cr>
-
-nnoremap <Space> za
-
-""" Behaviour modifiers
-
+" undo stuff, not sure i like this
 set undofile
 set undodir=~/.vim/undodir
-set clipboard=unnamed
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-set foldmethod=marker
-"set backspace=indent,eol,start
 
-autocmd BufWritePre *.erb,*.scss,*.rb,*.js,*.c,*.py,*.php :%s/\s\+$//e
-
-autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
-autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
-
-set ignorecase
-set incsearch
-set smartcase
-set scrolloff=10
-set hlsearch!
-
-set wildmode=longest,list,full
-set completeopt=longest,menuone
-
-"setlocal spell spelllang=en
-nmap ss :set spell!<CR>
-set nospell
-autocmd FileType gitcommit setlocal spell
-
-let g:tex_flavor = 'tex'
-autocmd FileType markdown,tex 
-            \ setlocal spell wrap |
-            \ nnoremap <expr> k v:count == 0 ? 'gk' : 'k' |
-            \ nnoremap <expr> j v:count == 0 ? 'gj' : 'j' |
-
-autocmd BufReadPost *
-            \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-            \   exe "normal g`\"" |
-            \ endif
-
-xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
-function! ExecuteMacroOverVisualRange()
-    echo "@".getcmdline()
-    execute ":'<,'>normal @".nr2char(getchar())
-endfunction
-
-""" Plugins
-
-" NERDTree
-map <C-n> :NERDTreeTabsToggle<CR>
-map <C-f> :NERDTreeFind<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-let NERDTreeChDirMode=2
-let g:NERDTreeDirArrowExpandable = '├'
-let g:NERDTreeDirArrowCollapsible = '└'
-"let g:NERDTreeMapActivateNode = '<tab>'
-set mouse=a
-set listchars=tab:>-,trail:-,extends:→
-
-
-" argwrap
-nnoremap <silent> <Bslash>a :ArgWrap<CR>
-let g:argwrap_padded_braces = '{'
-
-" fzf config
+"FZF
 nmap <C-p> :Files<cr>
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
@@ -183,108 +79,67 @@ let g:rg_command = '
 
 command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
-" Eslint fix
-" autocmd BufWritePre *.js execute 'call ESLintFix()'
 
-" vim-move
-let g:move_key_modifier = 'C'
-
-" rainbow brackets
-"autocmd VimEnter * RainbowParenthesesToggle
-"autocmd Syntax * RainbowParenthesesLoadRound
-"autocmd Syntax * RainbowParenthesesLoadSquare
-"autocmd Syntax * RainbowParenthesesLoadBraces
-
-" Highlight jump points
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
-" snippet trigger key
-"let g:UltiSnipsExpandTrigger="<C-R><tab>"
-
-" vimtex
-let g:vimtex_view_method = 'zathura'
-nnoremap <M-a> :VimtexTocToggle<CR>
-"let g:vimtex_latexmk_options = '-pdf -pdflatex="pdflatex --shell-escape %O %S" -verbose -file-line-error -synctex=1 -interaction=nonstopmode'
-let g:livepreview_previewer = 'zathura'
-
-" instant markdown
-let g:instant_markdown_slow = 1
-
-let g:vimtex_compiler_latexmk = {
-            \ 'backend' : 'nvim',
-            \ 'background' : 1,
-            \ 'build_dir' : 'build',
-            \ 'callback' : 1,
-            \ 'continuous' : 1,
-            \ 'executable' : 'latexmk',
-            \ 'options' : [
-            \   '-pdf',
-            \   '-verbose',
-            \   '-file-line-error',
-            \   '-synctex=1',
-            \   '-interaction=nonstopmode',
-            \ ],
-            \}
+"Misc
+set ignorecase
+set incsearch
+set smartcase
+set scrolloff=10
+set hlsearch!
+set hidden
+let g:ranger_command_override = 'ranger --cmd "set show_hidden=true"'
+let g:NERDTreeHijackNetrw = 0 
+let g:ranger_replace_netrw = 1 
+let g:prettier#exec_cmd_async = 1
+let g:deoplete#enable_at_startup = 1
 
 
 
-"
-"LATEX SHORTCUTS
-"
 
-autocmd FileType tex nnoremap ;up <Esc>/usepackage<Enter>o\usepackage{}<Esc>
-autocmd FileType tex inoremap ;em \emph{}<++><Esc>T{i
-autocmd FileType tex inoremap ;bf \textbf{}<++><Esc>T{i
-autocmd FileType tex inoremap ;sec \section{}<Enter><Enter><++><Esc>2kf}i
-autocmd FileType tex inoremap ;ssec \subsection{}<Enter><Enter><++><Esc>2kf}i
-autocmd FileType tex inoremap ;sssec \subsubsection{}<Enter><Enter><++><Esc>2kf}i
-autocmd FileType tex inoremap ;head <ESC>o%---------------------------------------------------------------------------------------- <CR>% 	<++><CR>%----------------------------------------------------------------------------------------<Esc>o<Esc>/<++><Enter>N"_c4l
-autocmd FileType tex inoremap ;line <ESC>o%----------------------------------------------------------------------------------------<ESC>o<ESC>o
-autocmd FileType tex inoremap ;fig \begin{figure}<Enter><Enter>\end{figure}<Enter><Enter><++><Esc>3kA
-autocmd FileType tex inoremap ;pc \parencite{}<++><Esc>T{i
-autocmd FileType tex inoremap ;li <Enter>\item<Space>
-autocmd FileType tex inoremap ;a \href{}{<++>}<Space><++><Esc>2T{i
-autocmd FileType tex inoremap ;com \begin{comment}<Enter><Enter>\end{comment}<Enter><Enter><++><Esc>3kA
-
-autocmd FileType tex inoremap ;np <Enter>\newpage<Space>
+"Javascript
 
 
 call plug#begin('~/.vim/plugged')
 filetype plugin indent on
 
 " Features
-Plug 'scrooloose/nerdtree'                                           " File tree browser
-Plug 'Xuyuanp/nerdtree-git-plugin'                                   " Git for NerdTree
-Plug 'jistr/vim-nerdtree-tabs'                                       " NerdTree independent of tabs
-Plug 'jreybert/vimagit'                                              " Interactive git staging
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }    " Install fzf for user
 Plug 'junegunn/fzf.vim'                                              " Fzf vim plugin
 Plug 'ap/vim-buftabline'
 Plug 'itchyny/lightline.vim'
-Plug 'lervag/vimtex'
-Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+Plug 'francoiscabrol/ranger.vim'
+"Plug 'wesQ3/vim-windowswap'
+"Plug 'zhamlin/tiler.vim'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
+
 
 " Small utilities
-Plug 'bag-man/copypath.vim'                                          " copy path of file
 Plug 'rbgrouleff/bclose.vim'                                         " Close current buffer
-Plug 'can3p/incbool.vim'                                             " Toggle true/false
-Plug 'kopischke/vim-fetch'                                           " Use line numbers in file paths
 Plug 'matze/vim-move'                                                " Move lines up and down
-Plug 'chilicuil/vim-sprunge'                                         " Paste selection to sprunge
-Plug 'FooSoft/vim-argwrap'                                           " Wrap arguments to multi-lines
-Plug 'szw/vim-g'                                                     " Google from Vim
-Plug 'google/vim-searchindex'                                        " Number of search results
-Plug 'sbdchd/neoformat'
+
 
 
 " Languages
 Plug 'moll/vim-node'                                                 " Syntax for node.js
 Plug 'wavded/vim-stylus'                                             " Stylus for stylus
-Plug 'digitaltoad/vim-pug'                                           " Syntax for pug
 Plug 'lervag/vimtex'                                                 " Build LaTeX files
 Plug 'josudoey/vim-eslint-fix'                                       " Eslint fixamajig
-Plug 'othree/yajs.vim'                                             " javascript
+"Plug 'othree/yajs.vim'                                             " javascript
 Plug 'zeekay/vim-beautify'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+"Plug 'maksimr/vim-jsbeautify'
+Plug 'sheerun/vim-polyglot'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'fatih/vim-go'
 
 " Snippets
 "Plug 'SirVer/ultisnips'                                              " Snippet engine
@@ -304,13 +159,12 @@ Plug 'tpope/vim-rhubarb'                                             " Github br
 " Appearance
 Plug 'mkitt/tabline.vim'                                             " Cleaner tabs
 Plug 'chrisbra/Colorizer'                                            " Show hex codes as colours
-Plug 'kien/rainbow_parentheses.vim'                                  " Colour matched brackets
 Plug 'suan/vim-instant-markdown'                                     " Markdown preview instant-markdown-d
-Plug 'unblevable/quick-scope'                                        " Highlight jump characters
 Plug 'chriskempson/base16-vim'                                       " color scheme
 Plug 'morhetz/gruvbox'                                               " color scheme
 Plug 'NLKNguyen/papercolor-theme'                                      " color scheme
 Plug 'nightsense/vimspectr'
+
 
 
 " Text objects
@@ -327,6 +181,7 @@ Plug 'nightsense/vimspectr'
 
 call plug#end()
 
+
 """ Appearance
 syntax on
 set number relativenumber
@@ -338,8 +193,9 @@ set background=dark
 "set t_Co=16
 
 
-colorscheme base16-gruvbox-dark-hard  
-let base16colorspace=256
+"colorscheme base16-gruvbox-dark-hard  
+colorschem vimspectrgrey-dark 
+"let base16colorspace=256
 
 
 hi LineNr  ctermbg=none 
@@ -351,7 +207,10 @@ hi TabLineFill ctermbg=none ctermfg=240
 hi PmenuSel ctermbg=none ctermfg=250
 hi TabLine ctermbg=none ctermfg=240
 
-hi TabLineSel ctermbg=none ctermfg=250
+hi TabLineSel ctermbg=none ctermfg=245
+
+hi Whitespace ctermfg=236 
+
 
 set cindent
 set expandtab
@@ -366,7 +225,13 @@ set showcmd
 "match Delimiter /\d\ze\%(\d\d\%(\d\{3}\)*\)\>/
 
 set showmatch
-"set listchars=tab:>-,trail:· " Show tabs and trailing space
+set listchars=tab:>-,trail:· " Show tabs and trailing space
+set list
+hi SpecialKey ctermfg=236 
+
+hi Pmenu ctermbg=236 ctermfg=240
+hi PmenuSel ctermfg=250 
+hi PmenuSbar ctermbg=0
 
 
 "set expandtab ts=4 sw=4 ai
@@ -378,18 +243,12 @@ set laststatus=2
 
 hi StatusLine ctermbg=none 
 hi  VertSplit ctermbg=none ctermfg=none
-set fillchars+=vert:\ 
-
-
+"set fillchars+=vert:\ 
 
 "let g:UltiSnipsUsePythonVersion = 3
 let g:indentLine_leadingSpaceEnabled = 1
 
-
-
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
-
 
 let g:buftabline_show = 1
 let g:buftabline_numbers = 0
@@ -398,10 +257,10 @@ let g:buftabline_numbers = 0
 set virtualedit=onemore
 set noshowmode
 
-let NERDTreeShowHidden=1
-let NERDTreeMinimalUI=1
-let NERDTreeDirArrows=1
-let NERDTreeWinSize=50
+"let NERDTreeShowHidden=1
+"let NERDTreeMinimalUI=1
+"let NERDTreeDirArrows=1
+"let NERDTreeWinSize=50
 
 
 let g:lightline = {
@@ -416,3 +275,43 @@ set preserveindent
 set softtabstop=0
 set shiftwidth=4
 set tabstop=4
+set swb=useopen
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+
+" Tiling wm in vim, because why not
+    nmap <C-W>n <plug>TilerNew
+    nmap <C-W>s <plug>TilerNew
+    nmap <C-W>v <plug>TilerNew
+    nmap <C-W>q <plug>TilerClose
+    nmap <C-W>. <plug>TilerRotateForwards
+    nmap <C-W>, <plug>TilerRotateBackwards
+
+    nmap <C-w><space> <Plug>TilerZoom
+    nmap <C-Space> <Plug>TilerFocus
+
+    nmap <C-W>k <Plug>TilerAddMaster
+    nmap <C-W>j <Plug>TilerDelMaster
+    nmap <C-W>l <Plug>TilerRotateLayoutR
+    nmap <C-W>h <Plug>TilerRotateLayoutL
+
+    " not specific to tiler, but useful for window navigation.
+    nmap <C-J> :wincmd j<CR>
+    nmap <C-k> :wincmd k<CR>
+    nmap <C-l> :wincmd l<CR>
+    nmap <C-h> :wincmd h<CR>
+
+
+nnoremap <Leader>b :ls<CR>:sb<Space>
+
+
+" Whitespaces
+
+" show leading spaces
+hi Conceal guibg=NONE ctermbg=NONE ctermfg=DarkGrey
+autocmd BufWinEnter * setl conceallevel=2 concealcursor=nv
+autocmd BufWinEnter * syn match LeadingSpace /\(^ *\)\@<= / containedin=ALL conceal cchar=·
+autocmd BufReadPre * setl conceallevel=2 concealcursor=nv
+autocmd BufReadPre * syn match LeadingSpace /\(^ *\)\@<= / containedin=ALL conceal cchar=·

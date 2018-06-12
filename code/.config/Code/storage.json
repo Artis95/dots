@@ -21,6 +21,11 @@
             "label": "Ctrl+Shift+T",
             "isNative": true
         },
+        "workbench.action.openRecent": {
+            "id": "workbench.action.openRecent",
+            "label": "Ctrl+R",
+            "isNative": true
+        },
         "workbench.action.files.save": {
             "id": "workbench.action.files.save",
             "label": "Ctrl+S",
@@ -432,19 +437,32 @@
             "isNative": true
         }
     },
-    "theme": "vs-dark vscode-theme-defaults-themes-dark_plus-json",
+    "theme": "vs-dark tomphilbin-gruvbox-themes-themes-dark-hard-tmTheme",
     "themeBackground": "#151515",
     "windowsState": {
         "openedWindows": [],
         "lastActiveWindow": {
-            "backupPath": "/home/stan/.config/Code/Backups/1528730430099",
+            "folderPath": "/home/stan/.dots/awesome/.config/awesome/themes",
+            "backupPath": "/home/stan/.config/Code/Backups/e9712ff40f6c89633eb9b094d955763f",
             "uiState": {
                 "mode": 1,
-                "x": 20,
-                "y": 40,
-                "width": 1560,
-                "height": 840
+                "x": 23,
+                "y": 43,
+                "width": 1554,
+                "height": 834
             }
         }
-    }
+    },
+    "openedPathsList": {
+        "workspaces": [
+            "/home/stan/cloud/fontys/bluckur-validator",
+            "/home/stan/.dots/awesome/.config/awesome/themes",
+            "/home/stan/Cloud",
+            "/home/stan/Dropbox",
+            "/tmp/react-example",
+            "/home/stan/.dots/awesome/.config"
+        ],
+        "files": []
+    },
+    "pickerWorkingDir": "/home/stan/cloud/fontys"
 }

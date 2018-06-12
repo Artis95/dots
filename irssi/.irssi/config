@@ -30,7 +30,7 @@ servers = (
 
 chatnets = { unixchat = { type = "IRC"; nick = "artis"; }; };
 
-channels = (
+channels = ( 
   { name = "#unix"; chatnet = "unixchat"; autojoin = "Yes"; }
 );
 
@@ -54,7 +54,6 @@ settings = {
   };
   "fe-common/core" = {
     theme = "neongold.theme";
-    bell_beeps = "no";
     autolog_path = "/var/logs/irc/$tag/$0.log";
     autolog = "yes";
   };

@@ -24,7 +24,7 @@ theme.fg_urgent                                 = "#DDDDFF"
 theme.bg_normal                                 = "#151515"
 theme.bg_focus                                  = "#151515"
 theme.bg_urgent                                 = "#151515"
-theme.border_width                              = 4
+theme.border_width                              = 7
 theme.border_normal                             = "#191919"
 theme.border_focus                              = "#232323"
 theme.border_marked                             = "#3F3F3F"
@@ -327,8 +327,7 @@ function theme.at_screen_connect(s)
              small_spr,
              small_spr,
              small_spr,
-            theme.volume.widget,
-             small_spr,
+             --small_spr,
             bat0.widget,
             small_spr,
             bat1.widget,
@@ -351,9 +350,10 @@ function theme.at_screen_connect(s)
 
         { -- Right widgets
 	   layout = wibox.layout.fixed.horizontal,
-	    music_icon,
-            small_spr,
-            theme.mpd.widget,
+	   -- music_icon,
+      --      small_spr,
+            --theme.mpd.widget,
+            theme.volume.widget,
           --  wibox.widget.systray(),
              small_spr,
 			ram_icon,

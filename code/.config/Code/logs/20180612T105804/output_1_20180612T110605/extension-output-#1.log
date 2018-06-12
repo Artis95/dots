@@ -1,0 +1,3 @@
+11:06:06 - Unhandled Rejection at: Promise [object Promise]. Reason: TypeError: Cannot read property 'document' of undefined.
+11:09:58 - VimState: invalid value for set cursor position. This is probably bad?
+11:09:58 - VimState: invalid value for set cursor position. This is probably bad?
