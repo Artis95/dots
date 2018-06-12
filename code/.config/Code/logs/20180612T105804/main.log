@@ -1,8 +1,0 @@
-[2018-06-12 10:58:05.054] [main] [info] update#setState idle
-[2018-06-12 10:58:35.068] [main] [info] update#setState checking for updates
-[2018-06-12 10:58:55.114] [main] [error] Error: net::ERR_NAME_RESOLUTION_FAILED
-[2018-06-12 10:58:55.115] [main] [info] update#setState idle
-[2018-06-12 11:58:35.136] [main] [info] update#setState checking for updates
-[2018-06-12 11:58:35.796] [main] [info] update#setState idle
-[2018-06-12 12:58:35.253] [main] [info] update#setState checking for updates
-[2018-06-12 12:58:35.920] [main] [info] update#setState idle
