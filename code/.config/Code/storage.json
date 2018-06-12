@@ -442,13 +442,12 @@
     "windowsState": {
         "openedWindows": [],
         "lastActiveWindow": {
-            "folderPath": "/home/stan/.dots/awesome/.config/awesome/themes",
-            "backupPath": "/home/stan/.config/Code/Backups/e9712ff40f6c89633eb9b094d955763f",
+            "backupPath": "/home/stan/.config/Code/Backups/1528827968017",
             "uiState": {
                 "mode": 1,
                 "x": 23,
                 "y": 43,
-                "width": 1554,
+                "width": 762,
                 "height": 834
             }
         }
@@ -462,7 +461,9 @@
             "/tmp/react-example",
             "/home/stan/.dots/awesome/.config"
         ],
-        "files": []
+        "files": [
+            "/home/stan/.dots/weechat/.weechat/irc.conf"
+        ]
     },
     "pickerWorkingDir": "/home/stan/cloud/fontys"
 }
