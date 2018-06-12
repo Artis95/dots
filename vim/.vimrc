@@ -199,7 +199,7 @@ colorschem vimspectrgrey-dark
 
 
 hi LineNr  ctermbg=none 
-hi CursorLineNR ctermbg=236
+hi CursorLineNR ctermbg=none ctermfg=yellow
 hi Normal ctermbg=none
 hi Search ctermfg=none ctermbg=238
 hi SignColumn ctermbg=none ctermfg=240
@@ -209,7 +209,8 @@ hi TabLine ctermbg=none ctermfg=240
 
 hi TabLineSel ctermbg=none ctermfg=245
 
-hi Whitespace ctermfg=236 
+hi Whitespace ctermfg=grey 
+hi EndOfBuffer ctermfg=none ctermbg=none
 
 
 set cindent
@@ -221,6 +222,7 @@ set laststatus=2
 set statusline=%F
 set wildmenu
 set showcmd
+set mouse=a
 
 "match Delimiter /\d\ze\%(\d\d\%(\d\{3}\)*\)\>/
 
