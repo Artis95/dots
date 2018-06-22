@@ -58,7 +58,6 @@ run_once({ "urxvtd", "unclutter -root" })
 -- }}}
 
 -- {{{ Variable definitions
-local chosen_theme = "ergo"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "urxvt"
@@ -75,20 +74,20 @@ awful.util.terminal = terminal
 awful.util.tagnames = { "home", "term", "code", "file", "surf", "docs", "chat", "temp", "musc" }
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    --   awful.layout.suit.floating,
-       awful.layout.suit.tile,
-     --  awful.layout.suit.tile.left,
-     --  awful.layout.suit.tile.bottom,
-     --  awful.layout.suit.tile.top,
-       -- awful.layout.suit.spiral,
-    -- awful.layout.suit.spiral.dwindle,
-       awful.layout.suit.max,
-      awful.layout.suit.fair,
-     --  awful.layout.suit.corner.nw,
-      -- awful.layout.suit.corner.ne,
-       -- awful.layout.suit.corner.sw,
-       -- awful.layout.suit.corner.se,
-   }
+--   awful.layout.suit.floating,
+awful.layout.suit.tile,
+--  awful.layout.suit.tile.left,
+--  awful.layout.suit.tile.bottom,
+--  awful.layout.suit.tile.top,
+-- awful.layout.suit.spiral,
+-- awful.layout.suit.spiral.dwindle,
+awful.layout.suit.max,
+awful.layout.suit.fair,
+--  awful.layout.suit.corner.nw,
+-- awful.layout.suit.corner.ne,
+-- awful.layout.suit.corner.sw,
+-- awful.layout.suit.corner.se,
+}
 
 awful.util.taglist_buttons = awful.util.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -106,6 +105,7 @@ awful.util.taglist_buttons = awful.util.table.join(
                     awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
                     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
                 )
+
 awful.util.tasklist_buttons = awful.util.table.join(
                      awful.button({ }, 1, function (c)
                                               if c == client.focus then
@@ -152,7 +152,7 @@ lain.layout.cascade.tile.extra_padding = 5
 lain.layout.cascade.tile.nmaster       = 5
 lain.layout.cascade.tile.ncol          = 2
 
-local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
+local theme_path = string.format("%s/.config/awesome/theme.lua", os.getenv("HOME"))
 beautiful.init(theme_path)
 -- }}}
 
@@ -169,28 +169,12 @@ awful.util.mymainmenu = awful.menu({
         { "awesome", myawesomemenu },
         { "file manager", filemanager },
         { "user terminal", terminal }, 
-        {"lock", "lock"}
+        {"lock", "betterlock"}
     }
 })
 
 beautiful.menu_bg_normal ="#151515"
 
---menubar.utils.terminal = terminal -- Set the Menubar terminal for applications that require it
--- }}}
-
--- {{{ Screen
--- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-screen.connect_signal("property::geometry", function(s)
-    -- Wallpaper
-    if beautiful.wallpaper then
-        local wallpaper = beautiful.wallpaper
-        -- If wallpaper is a function, call it with the screen
-        if type(wallpaper) == "function" then
-            wallpaper = wallpaper(s)
-        end
-        gears.wallpaper.maximized(wallpaper, s, true)
-    end
-end)
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) end)
 -- }}}
@@ -274,23 +258,12 @@ globalkeys = awful.util.table.join(
         end
     end),
 
-    -- On the fly useless gaps change
-    awful.key({ altkey, "Control" }, "+", function () lain.util.useless_gaps_resize(1) end),
-    awful.key({ altkey, "Control" }, "-", function () lain.util.useless_gaps_resize(-1) end),
-
-    -- Dynamic tagging
-    awful.key({ modkey, "Shift" }, "Left", function () lain.util.move_tag(1) end),   -- move to next tag
-    awful.key({ modkey, "Shift" }, "Right", function () lain.util.move_tag(-1) end), -- move to previous tag
-    awful.key({ modkey, "Shift" }, "d", function () lain.util.delete_tag() end),
+    -- Launcher
     awful.key({ modkey, }, "d", function () awful.spawn("rmenu") end),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
-    awful.key({ modkey, "Control" }, "r", awesome.restart,
-              {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit,
-              {description = "quit awesome", group = "awesome"}),
 
     awful.key({ altkey, "Shift"   }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
@@ -335,18 +308,7 @@ globalkeys = awful.util.table.join(
                 function ()
                         os.execute(string.format("amixer -q set %s 0%%", beautiful.volume.channel))
                         beautiful.volume.update()
-                end),
-
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"})
+                end)
     --]]
 )
 
@@ -554,9 +516,7 @@ client.connect_signal("mouse::enter", function(c)
 end)
 
 
-awful.spawn.with_shell("autostart")
-
-
+--awful.spawn.with_shell("autostart")
 -- No border for maximized clients
 client.connect_signal("focus",
     function(c)
