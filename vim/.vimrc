@@ -129,9 +129,6 @@ Plug 'matze/vim-move'                                                " Move line
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'dkarter/bullets.vim'
 
-
-
-
 " Languages
 Plug 'gabrielelana/vim-markdown'
 Plug 'moll/vim-node'                                                 " Syntax for node.js
@@ -170,6 +167,7 @@ Plug 'chriskempson/base16-vim'                                       " color sch
 Plug 'morhetz/gruvbox'                                               " color scheme
 Plug 'NLKNguyen/papercolor-theme'                                      " color scheme
 Plug 'nightsense/vimspectr'
+Plug 'kudabux/lightline-srcery'
 
 
 
@@ -352,19 +350,3 @@ au BufNew,BufRead  * set autoread
 
 set nospell
 
-"set autoread
-"augroup checktime
-"    au!
-"    if !has("gui_running")
-"        "silent! necessary otherwise throws errors when using command
-"        "line window.
-"        autocmd BufEnter        * silent! checktime
-"        autocmd CursorHold      * silent! checktime
-"        autocmd CursorHoldI     * silent! checktime
-"    endif
-"augroup END
-
-
-"au CursorHold,CursorHoldI * checktime
-
-"set updatetime=750
