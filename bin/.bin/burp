@@ -1,3 +1,0 @@
-#!/bin/bash
-
-nohup java -jar /home/stan/Programs/burpsuite_free_v1.7.10.jar >/dev/null 2>&1 &

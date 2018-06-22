@@ -1,2 +1,0 @@
-#! /bin/bash
-cd && cd ~/Shared/Stage/openvpn/ && sudo openvpn --config siem.ovpn

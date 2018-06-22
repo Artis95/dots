@@ -1,8 +1,0 @@
-#!/bin/bash
-cur=$(pamixer --get-mute)
-val=$(pamixer --get-volume)
-if [[ $cur == 'true' ]]; then
-echo "Muted"
-else
-echo $val
-fi

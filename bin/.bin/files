@@ -1,3 +1,0 @@
-#!/bin/bash
-
-gtk3-nocsd nautilus >/dev/null 2>&1 &

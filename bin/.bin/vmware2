@@ -1,3 +1,0 @@
-#!/bin/bash
-
-nohup sudo  vmware >/dev/null 2>&1 &

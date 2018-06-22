@@ -1,7 +1,0 @@
-#!/bin/bash
-bspc monitor -f
-    for monitor in $(bspc query -M)
-     do
-      bspc monitor -f $monitor
-      bspc desktop -f next
-     done

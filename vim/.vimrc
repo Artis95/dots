@@ -1,4 +1,5 @@
 
+
 """ Auto Installation
 
 if empty(glob("~/.vim/autoload/plug.vim"))
@@ -103,6 +104,7 @@ call plug#begin('~/.vim/plugged')
 filetype plugin indent on
 
 " Features
+Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }    " Install fzf for user
 Plug 'junegunn/fzf.vim'                                              " Fzf vim plugin
 Plug 'ap/vim-buftabline'
@@ -124,10 +126,14 @@ let g:deoplete#enable_at_startup = 1
 " Small utilities
 Plug 'rbgrouleff/bclose.vim'                                         " Close current buffer
 Plug 'matze/vim-move'                                                " Move lines up and down
+Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'dkarter/bullets.vim'
+
 
 
 
 " Languages
+Plug 'gabrielelana/vim-markdown'
 Plug 'moll/vim-node'                                                 " Syntax for node.js
 Plug 'wavded/vim-stylus'                                             " Stylus for stylus
 Plug 'lervag/vimtex'                                                 " Build LaTeX files
@@ -179,6 +185,8 @@ Plug 'thinca/vim-textobj-function-javascript'                        " Add JS fu
 Plug 'reedes/vim-textobj-sentence'                                   " Sentence object
 Plug 'nightsense/vimspectr'
 
+Plug 'shime/vim-livedown'
+
 call plug#end()
 
 
@@ -209,7 +217,7 @@ hi TabLine ctermbg=none ctermfg=240
 
 hi TabLineSel ctermbg=none ctermfg=245
 
-hi Whitespace ctermfg=grey 
+hi Whitespace ctermfg=236 
 hi EndOfBuffer ctermfg=none ctermbg=none
 
 
@@ -308,6 +316,10 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 nnoremap <Leader>b :ls<CR>:sb<Space>
 
+autocmd Filetype rmd nnoremap <Leader>rm :!echo<space>"require(rmarkdown);<space>render('<c-r>%')"<space>\|<space>R<space>--vanilla<enter>
+
+
+
 
 " Whitespaces
 
@@ -317,3 +329,42 @@ autocmd BufWinEnter * setl conceallevel=2 concealcursor=nv
 autocmd BufWinEnter * syn match LeadingSpace /\(^ *\)\@<= / containedin=ALL conceal cchar=·
 autocmd BufReadPre * setl conceallevel=2 concealcursor=nv
 autocmd BufReadPre * syn match LeadingSpace /\(^ *\)\@<= / containedin=ALL conceal cchar=·
+
+" Bullets
+let g:bullets_enabled_file_types = [
+    \ 'markdown',
+    \ 'rmd',
+    \ 'text',
+    \ 'gitcommit',
+    \ 'scratch'
+    \]
+
+noremap <silent> <leader>om :LivedownToggle<cr>
+
+let g:livedown_autorun = 0
+let g:livedown_open = 1 
+let g:livedown_browser = "'surf'"
+
+
+
+au BufNew,BufRead  * set nospell
+au BufNew,BufRead  * set autoread
+
+set nospell
+
+"set autoread
+"augroup checktime
+"    au!
+"    if !has("gui_running")
+"        "silent! necessary otherwise throws errors when using command
+"        "line window.
+"        autocmd BufEnter        * silent! checktime
+"        autocmd CursorHold      * silent! checktime
+"        autocmd CursorHoldI     * silent! checktime
+"    endif
+"augroup END
+
+
+"au CursorHold,CursorHoldI * checktime
+
+"set updatetime=750

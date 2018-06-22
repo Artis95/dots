@@ -1,3 +1,0 @@
-#!/bin/bash
-
-nohup  /home/stan/Programs/Archi/Archi64 >/dev/null 2>&1 &

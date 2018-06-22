@@ -37,8 +37,7 @@ fi
 
 
 xset +fp ~/.local/share/fonts
+xset b off
 mopidy &
 xsetroot -cursor_name left_ptr
- setxkbmap -option "caps:swapescape" && exec awesome 
-
-
+setxkbmap -option "caps:swapescape" && exec awesome 

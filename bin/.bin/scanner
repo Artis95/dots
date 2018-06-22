@@ -1,3 +1,0 @@
-#!/bin/bash
-
-sudo docker run --rm -it -p 7331:7331 arachni/arachni

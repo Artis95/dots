@@ -1,2 +1,0 @@
-#!/bin/sh
-sudo xboxdrv -c /home/stan/.config/xbox.ini   2>&1 > /dev/null 
