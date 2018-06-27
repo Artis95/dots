@@ -128,6 +128,8 @@ Plug 'rbgrouleff/bclose.vim'                                         " Close cur
 Plug 'matze/vim-move'                                                " Move lines up and down
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'dkarter/bullets.vim'
+Plug 'mhinz/vim-startify'
+
 
 " Languages
 Plug 'gabrielelana/vim-markdown'

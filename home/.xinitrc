@@ -40,5 +40,6 @@ xset +fp ~/.local/share/fonts
 xset b off
 mopidy &
 xsetroot -cursor_name left_ptr
-autostart
-setxkbmap -option "caps:swapescape" && exec awesome 
+autostart 
+#setxkbmap -option "caps:swapescap" 
+xmodmap ~/.Xmodmap && exec awesome

@@ -8,9 +8,9 @@
       (setq package-check-signature nil)
     #+END_SRC
 * Legacy stuff
-  Because it took me a solid 5 minutes of getting used to emacs, I used a normal init.el at first. 
+  Because it took me a solid 5 minutes of getting used to emacs, I used a normal init.el at first.
   This hold my legacy code so that emacs keeps working the way I have gotten used too
-  
+
   #+BEGIN_SRC emacs-lisp
 
     (setq helm-descbinds-window-style 'same-window)
@@ -139,7 +139,7 @@ Always compile packages, and use the newest version available.
         user-mail-address "Stanneman95@gmail.com")
     #+END_SRC
 * Add =resources= to =load-path=
- If I said i know why this is here, I'd be lying 
+ If I said i know why this is here, I'd be lying
     #+BEGIN_SRC emacs-lisp
 	(add-to-list 'load-path "~/.emacs.d/resources/")
     #+END_SRC
@@ -152,11 +152,12 @@ Always compile packages, and use the newest version available.
 
     (setq-default evil-cross-lines t)
    #+END_SRC
-** Custom Keybind 
+** Custom Keybind
     #+BEGIN_SRC emacs-lisp
-  (define-key evil-normal-state-map "L" 'beginning-of-line)
+  (define-key evil-normal-state-map "H" 'beginning-of-line)
+  (define-key evil-normal-state-map "L" 'end-of-line)
   #+END_SRC
-   
+
 ** Evil Org Mode
     #+BEGIN_SRC emacs-lisp
 	(use-package evil-org
@@ -168,11 +169,11 @@ Always compile packages, and use the newest version available.
 	(lambda ()
 	(evil-org-set-key-theme))))
     #+END_SRC
-* Custom Keymaps 
+* Custom Keymaps
   Because we all need diffrent keymaps right?
 ** Emacs Related
    #+BEGIN_SRC emacs-lisp
-    
+
    #+END_SRC
 
 ** Evil Related
@@ -184,27 +185,27 @@ Always compile packages, and use the newest version available.
 	(global-evil-leader-mode)
 	(evil-leader/set-leader ";")
 	(evil-leader/set-key
-	"e" 'projectile-find-file 
-	"B" 'helm-mini 
-	"q" 'kill-buffer 
-	"r" 'ranger 
-	"d" 'deer 
-	"'" 'other-window 
+	"e" 'projectile-find-file
+	"B" 'helm-mini
+	"q" 'kill-current-buffer
+	"r" 'ranger
+	"d" 'deer
+  ";" 'avy-goto-word-1
+	"'" 'other-window
 	"v" 'split-window-below
-	"h" 'split-window-right 
+	"h" 'split-window-right
 	"t" 'treemacs-toggle
 	"b" 'helm-bookmarks)
     #+END_SRC
-* Make Emacs prettier 
+* Make Emacs prettier
 ** Powerline
   #+BEGIN_SRC emacs-lisp
     (setq-default indent-tabs-mode t)
     (require 'powerline-evil)
-    (setq powerline-arrow-shape 'utf8) 
+    (setq powerline-arrow-shape 'utf8)
     (powerline-evil-center-color-theme)
   #+END_SRC
-** Pretty org bullets 
-
+** Pretty org bullets
      ##+BEGIN_SRC emacs-lisp
 	 (use-package org-bullets
 	 :ensure t
@@ -226,8 +227,12 @@ Always compile packages, and use the newest version available.
 
 
    #+END_SRC
+** Whitespaces
+##+BEGIN_SRC emacs-lisp
+#(setq whitespace-style '(face tabs trailing tab-mark space-mark))
+##+END_SRC
 * Line Numbers
-   Linu numbers using nlinum 
+   Linu numbers using nlinum
    #+BEGIN_SRC emacs-lisp
     (use-package nlinum
     :config
@@ -235,18 +240,20 @@ Always compile packages, and use the newest version available.
     (add-hook 'prog-mode-hook 'nlinum-relative-mode)
     (add-hook 'org-mode-hook 'nlinum-relative-mode)
     (setq nlinum-relative-current-symbol "")      ;; or "" for display current line number
-    (setq nlinum-relative-offset 0)     
+    (setq nlinum-relative-offset 0)
     (setq nlinum-relative-redisplay-delay 0))      ;; delay
+    ;; Use `display-line-number-mode` as linum-mode's backend for smooth performance
+    (setq linum-relative-backend 'display-line-numbers-mode)
     #+END_SRC
 * Ranger
-    Ranger but in emacs, what is not to love. 
-    Makes dired work the way I want it too. 
+    Ranger but in emacs, what is not to love.
+    Makes dired work the way I want it too.
     #+BEGIN_SRC emacs-lisp
 	(setq ranger-show-hidden nil)
     #+END_SRC
 * Latex
-** General 
-#+BEGIN_SRC emacs-lisp
+** General
+##+BEGIN_SRC emacs-lisp
 	(require 'auctex-latexmk)
 	(auctex-latexmk-setup)
 	(setq TeX-auto-save t)
@@ -256,7 +263,7 @@ Always compile packages, and use the newest version available.
 	(lambda ()
 	(nlinum-mode -1)))
 	(latex-preview-pane-enable)
-#+END_SRC
+##+END_SRC
 * Tabbar
     #+BEGIN_SRC emacs-lisp
 	(setq tabbar-background-color "#151515") ;; the color of the tabbar background
@@ -283,7 +290,7 @@ Always compile packages, and use the newest version available.
                            (tern-mode)
                            (company-mode)))
 #+END_SRC
-* RMARKDOWN 
+* RMARKDOWN
 #+BEGIN_SRC emacs-lisp
     ;; MARKDOWN
     (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
@@ -296,13 +303,13 @@ Always compile packages, and use the newest version available.
 #+BEGIN_SRC emacs-lisp
  (with-eval-after-load 'org (setq org-startup-indented t))
 #+END_SRC
-* PDFTools 
+* PDFTools
 I prefer the pdf tools to docview
 ** making sure it actually works everytime
-#+BEGIN_SRC emacs-lisp
+##+BEGIN_SRC emacs-lisp
 (pdf-tools-install)
-#+END_SRC
-** Disable nlinum 
+##+END_SRC
+** Disable nlinum
 * yasnippet
 Because i cant remeber codeblocks
 #+BEGIN_SRC emacs-lisp
@@ -311,7 +318,7 @@ Because i cant remeber codeblocks
 #+END_SRC
 
 * Emacs Dyn WM
-I would like to give credit where credit is due, 
+I would like to give credit where credit is due,
 This is a dyanmic window manger in Emacs written by pervognsen
 I find this loads more useful than managing windows normally
 #+BEGIN_SRC emacs-lisp
@@ -319,19 +326,21 @@ I find this loads more useful than managing windows normally
 (load "wm.el")
 (require 'wm)
 (wm-mode 1)
-#+END_SRC 
-* Java
+#+END_SRC
+* Emacsclient
 #+BEGIN_SRC emacs-lisp
-(require 'eclim)
-(add-hook 'java-mode-hook 'eclim-mode)
-(setq help-at-pt-display-when-idle t)
-(setq help-at-pt-timer-delay 0.1)
-(help-at-pt-set-timer)
-;; regular auto-complete initialization
-(require 'auto-complete-config)
-(ac-config-default)
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+#+END_SRC
+* golang
+I quite like golang as a language
+#+BEGIN_SRC emacs-lisp
+(defun go-mode-setup ()
+  (go-eldoc-setup))
+(add-hook 'go-mode-hook 'go-mode-setup)
 
-;; add the emacs-eclim source
-(require 'ac-emacs-eclim)
-(ac-emacs-eclim-config)
+(defun go-mode-setup ()
+ (go-eldoc-setup)
+ (setq gofmt-command "~/.go/bin/goimports")
+ (add-hook 'before-save-hook 'gofmt-before-save))
+(add-hook 'go-mode-hook 'go-mode-setup)
 #+END_SRC 

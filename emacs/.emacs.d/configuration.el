@@ -130,7 +130,8 @@ user-mail-address "Stanneman95@gmail.com")
 
 (setq-default evil-cross-lines t)
 
-(define-key evil-normal-state-map "L" 'beginning-of-line)
+(define-key evil-normal-state-map "H" 'beginning-of-line)
+(define-key evil-normal-state-map "L" 'end-of-line)
 
 (use-package evil-org
 :ensure t
@@ -146,22 +147,23 @@ user-mail-address "Stanneman95@gmail.com")
 
 
 (global-evil-leader-mode)
-(evil-leader/set-leader ";")
-(evil-leader/set-key
-"e" 'projectile-find-file 
-"B" 'helm-mini 
-"q" 'kill-buffer 
-"r" 'ranger 
-"d" 'deer 
-"'" 'other-window 
-"v" 'split-window-below
-"h" 'split-window-right 
-"t" 'treemacs-toggle
-"b" 'helm-bookmarks)
+      (evil-leader/set-leader ";")
+      (evil-leader/set-key
+      "e" 'projectile-find-file
+      "B" 'helm-mini
+      "q" 'kill-current-buffer
+      "r" 'ranger
+      "d" 'deer
+";" 'avy-goto-word-1
+      "'" 'other-window
+      "v" 'split-window-below
+      "h" 'split-window-right
+      "t" 'treemacs-toggle
+      "b" 'helm-bookmarks)
 
 (setq-default indent-tabs-mode t)
 (require 'powerline-evil)
-(setq powerline-arrow-shape 'utf8) 
+(setq powerline-arrow-shape 'utf8)
 (powerline-evil-center-color-theme)
 
 (use-package dashboard
@@ -176,20 +178,12 @@ user-mail-address "Stanneman95@gmail.com")
 (add-hook 'prog-mode-hook 'nlinum-relative-mode)
 (add-hook 'org-mode-hook 'nlinum-relative-mode)
 (setq nlinum-relative-current-symbol "")      ;; or "" for display current line number
-(setq nlinum-relative-offset 0)     
+(setq nlinum-relative-offset 0)
 (setq nlinum-relative-redisplay-delay 0))      ;; delay
+;; Use `display-line-number-mode` as linum-mode's backend for smooth performance
+(setq linum-relative-backend 'display-line-numbers-mode)
 
 (setq ranger-show-hidden nil)
-
-(require 'auctex-latexmk)
-(auctex-latexmk-setup)
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq TeX-save-query nil)
-(add-hook 'doc-view-mode-hook
-(lambda ()
-(nlinum-mode -1)))
-(latex-preview-pane-enable)
 
 (setq tabbar-background-color "#151515") ;; the color of the tabbar background
 (custom-set-faces
@@ -221,8 +215,6 @@ user-mail-address "Stanneman95@gmail.com")
 
 (with-eval-after-load 'org (setq org-startup-indented t))
 
-(pdf-tools-install)
-
 (require 'yasnippet)
 (yas-global-mode 1)
 
@@ -231,15 +223,14 @@ user-mail-address "Stanneman95@gmail.com")
 (require 'wm)
 (wm-mode 1)
 
-(require 'eclim)
-(add-hook 'java-mode-hook 'eclim-mode)
-(setq help-at-pt-display-when-idle t)
-(setq help-at-pt-timer-delay 0.1)
-(help-at-pt-set-timer)
-;; regular auto-complete initialization
-(require 'auto-complete-config)
-(ac-config-default)
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 
-;; add the emacs-eclim source
-(require 'ac-emacs-eclim)
-(ac-emacs-eclim-config)
+(defun go-mode-setup ()
+  (go-eldoc-setup))
+(add-hook 'go-mode-hook 'go-mode-setup)
+
+(defun go-mode-setup ()
+ (go-eldoc-setup)
+ (setq gofmt-command "~/.go/bin/goimports")
+ (add-hook 'before-save-hook 'gofmt-before-save))
+(add-hook 'go-mode-hook 'go-mode-setup)

@@ -478,7 +478,7 @@ client.connect_signal("request::titlebars", function(c)
             awful.titlebar.widget.iconwidget(c),
             buttons = buttons,
             layout  = wibox.layout.fixed.horizontal
-        },
+        }
         { -- Middle
             { -- Title
                 align  = "center",
@@ -523,6 +523,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 --
 
 -- Spawn with awesome so doesn't delay startup
-awful.spawn.with_shell("setbackground")
 awful.spawn.with_shell("megabacksync")
-

@@ -33,7 +33,7 @@
     ;; If you edit it by hand, you could mess it up, so be careful.
     ;; Your init file should contain only one such instance.
     ;; If there is more than one, they won't work right.
-    '(default ((t (:inherit nil :stipple nil :background "#151515" :foreground "#fdf4c1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "PfEd" :family "scientifica"))))
+    '(default ((t (:inherit nil :stipple nil :background "#151515" :foreground "#fdf4c1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "PfEd" :family "curie"))))
     '(fringe ((t (:background "#151515")))))
 
 
@@ -154,7 +154,8 @@ Always compile packages, and use the newest version available.
    #+END_SRC
 ** Custom Keybind 
     #+BEGIN_SRC emacs-lisp
-  (define-key evil-normal-state-map "L" 'beginning-of-line)
+  (define-key evil-normal-state-map "H" 'beginning-of-line)
+  (define-key evil-normal-state-map "L" 'end-of-line)
   #+END_SRC
    
 ** Evil Org Mode
@@ -186,9 +187,10 @@ Always compile packages, and use the newest version available.
 	(evil-leader/set-key
 	"e" 'projectile-find-file 
 	"B" 'helm-mini 
-	"q" 'kill-buffer 
+	"q" 'kill-current-buffer 
 	"r" 'ranger 
 	"d" 'deer 
+  ";" 'avy-goto-word-1
 	"'" 'other-window 
 	"v" 'split-window-below
 	"h" 'split-window-right 
@@ -204,7 +206,6 @@ Always compile packages, and use the newest version available.
     (powerline-evil-center-color-theme)
   #+END_SRC
 ** Pretty org bullets 
-
      ##+BEGIN_SRC emacs-lisp
 	 (use-package org-bullets
 	 :ensure t
@@ -226,6 +227,10 @@ Always compile packages, and use the newest version available.
 
 
    #+END_SRC
+** Whitespaces
+#+BEGIN_SRC emacs-lisp
+ (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
+#+END_SRC 
 * Line Numbers
    Linu numbers using nlinum 
    #+BEGIN_SRC emacs-lisp
@@ -237,6 +242,8 @@ Always compile packages, and use the newest version available.
     (setq nlinum-relative-current-symbol "")      ;; or "" for display current line number
     (setq nlinum-relative-offset 0)     
     (setq nlinum-relative-redisplay-delay 0))      ;; delay
+    ;; Use `display-line-number-mode` as linum-mode's backend for smooth performance
+    (setq linum-relative-backend 'display-line-numbers-mode)
     #+END_SRC
 * Ranger
     Ranger but in emacs, what is not to love. 
@@ -246,7 +253,7 @@ Always compile packages, and use the newest version available.
     #+END_SRC
 * Latex
 ** General 
-#+BEGIN_SRC emacs-lisp
+##+BEGIN_SRC emacs-lisp
 	(require 'auctex-latexmk)
 	(auctex-latexmk-setup)
 	(setq TeX-auto-save t)
@@ -256,7 +263,7 @@ Always compile packages, and use the newest version available.
 	(lambda ()
 	(nlinum-mode -1)))
 	(latex-preview-pane-enable)
-#+END_SRC
+##+END_SRC
 * Tabbar
     #+BEGIN_SRC emacs-lisp
 	(setq tabbar-background-color "#151515") ;; the color of the tabbar background
@@ -299,9 +306,9 @@ Always compile packages, and use the newest version available.
 * PDFTools 
 I prefer the pdf tools to docview
 ** making sure it actually works everytime
-#+BEGIN_SRC emacs-lisp
+##+BEGIN_SRC emacs-lisp
 (pdf-tools-install)
-#+END_SRC
+##+END_SRC
 ** Disable nlinum 
 * yasnippet
 Because i cant remeber codeblocks
@@ -319,19 +326,4 @@ I find this loads more useful than managing windows normally
 (load "wm.el")
 (require 'wm)
 (wm-mode 1)
-#+END_SRC 
-* Java
-#+BEGIN_SRC emacs-lisp
-(require 'eclim)
-(add-hook 'java-mode-hook 'eclim-mode)
-(setq help-at-pt-display-when-idle t)
-(setq help-at-pt-timer-delay 0.1)
-(help-at-pt-set-timer)
-;; regular auto-complete initialization
-(require 'auto-complete-config)
-(ac-config-default)
-
-;; add the emacs-eclim source
-(require 'ac-emacs-eclim-source)
-(ac-emacs-eclim-config)
 #+END_SRC 
